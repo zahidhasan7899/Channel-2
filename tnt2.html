@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamTheGame - TNT Sports 2 HD</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background: #121212; color: white; margin: 0; }
+        header { background: #1e1e1e; padding: 15px; font-size: 24px; font-weight: bold; color: white; position: relative; }
+        .telegram-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); }
+        .telegram-icon img { width: 30px; height: 30px; }
+        h1 { margin-top: 20px; }
+        #video-container { width: 100%; max-width: 800px; margin: auto; }
+        video { width: 100%; height: auto; background: black; }
+        .channel-list { margin-top: 20px; }
+        .channel { display: block; padding: 10px; margin: 5px; background: #1e1e1e; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        StreamTheGame
+        <a href="https://t.me/streamthegame" target="_blank" class="telegram-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+        </a>
+    </header>
+
+    <h1>Live TV Streaming - TNT Sports 2 HD</h1>
+    
+    <div id="video-container">
+        <video id="liveStream" controls autoplay></video>
+    </div>
+
+    <h2>Available Channels</h2>
+    <div class="channel-list">
+        <a href="index.html" class="channel">TNT Sports 1 HD</a>
+        <a href="tnt2.html" class="channel">TNT Sports 2 HD</a>
+    </div>
+
+    <script>
+        var video = document.getElementById('liveStream');
+        var videoSrc = "https://cdn.hoichoi24.com/tntsports2hd/tracks-v1a1/mono.ts.m3u8";
+        
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+            video.addEventListener('loadedmetadata', function() {
+                video.play();
+            });
+        }
+    </script>
+</body>
+</html>
